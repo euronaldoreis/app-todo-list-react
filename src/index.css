@@ -9,3 +9,12 @@ body {
   height: 100vh;
   box-sizing: border-box;
 }
+
+.completed-textfield {
+  color: gray;
+  text-decoration: line-through;
+}
+
+.customAppBar {
+  height: 60px;
+}
