@@ -9,17 +9,18 @@ import {
   IconButton,
   Avatar,
   Menu,
-  MenuItem  } from '@mui/material';
-  import { onSnapshot } from 'firebase/firestore'
+  MenuItem } from '@mui/material';
+import { onSnapshot } from 'firebase/firestore'
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { createUser, getUser } from '../../services/firebaseService';
 
-const Header = ({ user }: any) => {
+
+const Header = ({user}: any) => {
   const navigate = useNavigate();
   const { logOut }: any = UserAuth();
+  const [listUser, setListUser] = useState<any>(null)
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-
-  console.log(user);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -40,34 +41,37 @@ const Header = ({ user }: any) => {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
+
+  useEffect(() => {
+    if (user !== null) {
+      const queryUser = getUser(user.email);
+
+      onSnapshot(queryUser, (querySnapshot: any) => {
+        setListUser(
+          querySnapshot.docs.map((doc: any) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        )
+      })
+    }
+  }, [user])
+
+  useEffect(() => {
+    if (listUser !== null && listUser.length === 0) {
+      createUser({ email: user.email, name: user.displayName, photoURL: user.photoURL })
+    }
+  }, [listUser]);
 
   return (
-    <AppBar position="static">
-    <Container>
-      <Grid item xs={6}>
-        <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Lista de Tarefas
-          </Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Box>
+    <AppBar position="static" className='customAppBar'>
+      <Container>
+        <Grid item xs={12}>
+          <Box mt={1} display="flex" alignItems='center' justifyContent='right'>
             <Tooltip title="Profile">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src={
+                <Avatar alt="user" src={
                   user ? user.photoURL
                   : '/static/images/avatar/2.jpg'
                   } />
