@@ -19,7 +19,6 @@ const LoginPage = () => {
   }
 
   useEffect(() => {
-    console.log(location);
     if (user !== null) {
       navigate('/app-todo-list-react/list')
     }
