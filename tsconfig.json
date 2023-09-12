@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "cypress/component/Header.cy.tsx"  ]
 }
