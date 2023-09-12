@@ -5,17 +5,17 @@ import {
   Typography,
   TextField
   } from '@mui/material';
-import CardTask from '../../components/CardTask';
-import AddTask from '../../components/AddTask';
+import CardTask from '../../components/CardTask/index';
+import AddTask from '../../components/AddTask/index';
 import { createTask, findAllTasks, deleteTask, updateTask } from '../../services/firebaseService';
 import { Timestamp, onSnapshot } from 'firebase/firestore';
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom'
-import Header from '../../components/Header';
+import Header from '../../components/Header/index';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import SkeletonList from '../../components/SkeletonList';
+import SkeletonList from '../../components/SkeletonList/index';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 
