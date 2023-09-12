@@ -9,11 +9,11 @@ import './index.css'
 
 const router = createBrowserRouter([
   {
-    path: '/app-todo-list-react/',
+    path: '/',
     element: <LoginPage />
   },
   {
-    path: '/app-todo-list-react/list',
+    path: '/list',
     element: (
       <Protected>
         <ListPage />

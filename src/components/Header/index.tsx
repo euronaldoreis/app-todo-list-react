@@ -33,7 +33,7 @@ const Header = ({user}: any) => {
   const handleSignOut = async () => {
     try {
       await logOut()
-      navigate('/app-todo-list-react/', {
+      navigate('/', {
         state: {
           mode: 'logout',
         },
@@ -70,7 +70,7 @@ const Header = ({user}: any) => {
         <Grid item xs={12}>
           <Box mt={1} display="flex" alignItems='center' justifyContent='right'>
             <Tooltip title="Profile">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton data-testid='menu-profile' onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="user" src={
                   user ? user.photoURL
                   : '/static/images/avatar/2.jpg'

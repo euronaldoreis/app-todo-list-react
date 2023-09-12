@@ -20,7 +20,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user !== null) {
-      navigate('/app-todo-list-react/list')
+      navigate('/list')
     }
   }, [user])
 

@@ -7,7 +7,7 @@ const Protected = ({ children }: any) => {
   const navigate = useNavigate()
   useEffect(() => {
     if (!user) {
-      navigate('/app-todo-list-react/')
+      navigate('/')
     }
   }, [user])
 
